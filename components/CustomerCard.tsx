@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import { Text } from 'react-native-paper';
-import { CustomerContextProps, CustomerContext } from '../context/customerContext';
+import { FormContextProps, FormContext } from '../context/formContext';
 import CustomerCardInfo from './CustomerCardInfo';
 import CustomerProfilePic from './CustomerProfilePic';
 
 const CustomerCard = () => {
-  const { customer } = useContext<CustomerContextProps>(CustomerContext);
+  const { state: customer } = useContext<FormContextProps>(FormContext);
 
   return (
     <View style={styles.container}>

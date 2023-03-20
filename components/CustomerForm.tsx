@@ -1,19 +1,17 @@
 import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { DropdownInput } from '.';
-import {
-  CustomerContext,
-  CustomerContextProps
-} from '../context/customerContext';
+import DateInput from './DateInput';
+import DropdownInput from './DropdownInput';
+import TextField from './TextField';
+import { FormContext, FormContextProps } from '../context/formContext';
 import { jobOptions } from '../helpers/constants';
-import { DateInput, TextField } from './';
 
 const CustomerForm = () => {
-  const { customer, setCustomer } =
-    useContext<CustomerContextProps>(CustomerContext);
+  const { state: customer, dispatch } =
+    useContext<FormContextProps>(FormContext);
 
   const handleChangeText = (name: string, newValue: string) => {
-    setCustomer((prev) => ({ ...prev, [name]: newValue }));
+    dispatch({ type: 'UPDATE_TEXT', payload: { field: name, text: newValue } });
   };
 
   return (
@@ -32,10 +30,10 @@ const CustomerForm = () => {
       <DropdownInput
         selected={customer.job}
         onSelect={(option) =>
-          setCustomer((prev) => ({
-            ...prev,
-            job: { label: option, value: option }
-          }))
+          dispatch({
+            type: 'UPDATE_JOB',
+            payload: { label: option, value: option }
+          })
         }
         options={jobOptions}
       />

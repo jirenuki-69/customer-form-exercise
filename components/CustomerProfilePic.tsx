@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { StyleSheet } from 'react-native';
-import { CustomerContextProps, CustomerContext } from '../context/customerContext';
+import { FormContextProps, FormContext } from '../context/formContext';
 import { Avatar } from 'react-native-paper';
 
 const CustomerProfilePic = () => {
-  const { customer: { pic } } = useContext<CustomerContextProps>(CustomerContext);
+  const { state: { pic } } = useContext<FormContextProps>(FormContext);
 
   return <Avatar.Image size={80} style={styles.pic} source={{ uri: pic }} />;
 };

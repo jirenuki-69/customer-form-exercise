@@ -1,11 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, Modal, View } from 'react-native';
 
-type DropdownOption = {
-  label: string;
-  value: string;
-};
-
 type OptionProps = {
   option: DropdownOption;
   onSelect: (value: string) => void;
