@@ -1,4 +1,4 @@
-import DropdownOption from "../components/DropdownOption";
+import Toast from 'react-native-toast-message';
 
 export const jobOptions: DropdownOption[] = [
   { label: 'Gerente', value: 'Gerente' },
@@ -7,3 +7,10 @@ export const jobOptions: DropdownOption[] = [
   { label: 'Soporte', value: 'Soporte' },
   { label: 'Lider de proyecto', value: 'Lider de proyecto' }
 ];
+
+export const showToast = (message: string, type: string = 'success') => {
+  Toast.show({
+    type,
+    text1: message
+  });
+};

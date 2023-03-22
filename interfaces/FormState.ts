@@ -5,4 +5,6 @@ interface FormState {
   job: DropdownOption;
   phoneNumber: string;
   pic: string;
+  locked: boolean;
+  errors: Errors
 }

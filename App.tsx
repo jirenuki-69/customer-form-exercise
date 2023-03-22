@@ -1,18 +1,26 @@
-import { useState, useReducer } from 'react';
+import { useReducer } from 'react';
 import { Text } from 'react-native-paper';
 import Constants from 'expo-constants';
+import Toast from 'react-native-toast-message';
 import { StatusBar, StyleSheet, View, ScrollView } from 'react-native';
 import { CustomerCard, CustomerForm } from './components';
-import { FormContext, FormContextProps } from './context/formContext';
+import { FormContext } from './context/formContext';
 import formReducer from './reducers/formReducer';
 
-const initialState = {
+const initialState: FormState = {
   name: 'Miguel Fuentes',
   birthDate: '15/09/2000',
   job: { label: 'Desarrollador Jr.', value: 'Desarrollador Jr.' },
   email: 'mfuentesmodelo@gmail.com',
   phoneNumber: '9995520584',
-  pic: 'https://www.pngall.com/wp-content/uploads/5/Profile-Transparent.png'
+  pic: 'https://www.pngall.com/wp-content/uploads/5/Profile-Transparent.png',
+  locked: false,
+  errors: {
+    errorText: null,
+    errorDate: null,
+    errorPhoneNumber: null,
+    errorEmail: null
+  }
 };
 
 export default function App() {
@@ -33,6 +41,7 @@ export default function App() {
           <CustomerForm />
         </View>
       </ScrollView>
+      <Toast />
     </FormContext.Provider>
   );
 }

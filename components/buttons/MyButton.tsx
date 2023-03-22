@@ -19,7 +19,7 @@ export default DropdownOption;
 
 const styles = StyleSheet.create({
   button: {
-    marginBottom: 15,
+    marginVertical: 10,
     borderRadius: 5
   }
 });

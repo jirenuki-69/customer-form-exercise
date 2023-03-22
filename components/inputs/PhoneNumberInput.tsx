@@ -1,30 +1,33 @@
+import { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { useTextField } from '../../hooks';
 import TextInputErrorMessage from './TextInputErrorMessage';
 
-const validatePhoneNumber = (phoneNumber: string): string | null => {
-  const isValidPhoneNumber = /^\d{10}$/g.test(phoneNumber);
-  if (!isValidPhoneNumber) {
-    return 'Invalid Phone Number';
-  }
-  return null;
-};
-
 type Props = {
   sendNewValue: (name: string, newValue: string) => void;
+  handleError: (error: string | null) => void;
   initialValue?: string;
-}
+};
 
-const PhoneNumberInput: React.FC<Props> = ({ sendNewValue, initialValue }) => {
+const PhoneNumberInput: React.FC<Props> = ({
+  sendNewValue,
+  handleError,
+  initialValue
+}) => {
   const { value, error, handleTextInputChange } = useTextField({
     initialValue: initialValue ?? '',
-    validate: validatePhoneNumber
+    validateCode: 'phone-number'
   });
+
+  useEffect(() => {
+    handleError(error);
+  }, [error]);
 
   const onChangeText = (value: string) => {
     handleTextInputChange(value);
     sendNewValue('phoneNumber', value);
+    handleError(error);
   };
 
   return (

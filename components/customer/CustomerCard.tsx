@@ -11,17 +11,24 @@ const CustomerCard = () => {
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
-        <Image style={styles.logo} source={require('../../assets/google.png')} />
+        <Text variant="bodyLarge" style={{ fontWeight: 'bold', color: 'blue' }}>
+          {customer.locked ? 'Locked' : 'Unlocked'}
+        </Text>
       </View>
       <View style={styles.userInfoContainer}>
         <CustomerProfilePic />
         <View style={styles.nameContainer}>
-          <Text variant='titleLarge' style={{ fontWeight: 'bold' }}>{customer.name}</Text>
+          <Text variant="titleLarge" style={{ fontWeight: 'bold' }}>
+            {customer.name}
+          </Text>
           <Text>{customer.job.label}</Text>
         </View>
         <View style={styles.row}>
           <CustomerCardInfo title="Birth Date" content={customer.birthDate} />
-          <CustomerCardInfo title="Phone Number" content={customer.phoneNumber} />
+          <CustomerCardInfo
+            title="Phone Number"
+            content={customer.phoneNumber}
+          />
           <CustomerCardInfo title="Email" content={customer.email} />
         </View>
       </View>
