@@ -1,13 +1,34 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { Text } from 'react-native';
 
-const useTextField = (initialState: any) => {
-  const [state, setState] = useState(initialState);
+type Props = {
+  initialValue: string;
+  validate?: (value: string) => string | null;
+};
 
-  const handleChangeText = (value: string) => {
-    setState({ value });
+type TextInputResult = {
+  value: string;
+  error: string | null;
+  handleTextInputChange: (value: string) => void;
+};
+
+const useTextField = ({ initialValue, validate }: Props): TextInputResult => {
+  const [value, setValue] = useState(initialValue);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleTextInputChange = (value: string) => {
+    setValue(value);
+    if (validate) {
+      const errorMessage = validate(value);
+      setError(errorMessage);
+    }
   };
 
-  return [state, handleChangeText];
+  return {
+    value,
+    error,
+    handleTextInputChange
+  };
 };
 
 export default useTextField;

@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const useForm = () => {
+const useForm = (initialState: FormState) => {
+  const [state, setState] = useState(initialState);
+
+  const submit = () => {
+    
+  };
+
   return '';
 };
 
