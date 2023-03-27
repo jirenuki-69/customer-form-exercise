@@ -8,18 +8,20 @@ import { FormContext } from './context/formContext';
 import formReducer from './reducers/formReducer';
 
 const initialState: FormState = {
-  name: 'Miguel Fuentes',
-  birthDate: '15/09/2000',
-  job: { label: 'Desarrollador Jr.', value: 'Desarrollador Jr.' },
-  email: 'mfuentesmodelo@gmail.com',
-  phoneNumber: '9995520584',
-  pic: 'https://www.pngall.com/wp-content/uploads/5/Profile-Transparent.png',
+  name: 'Albert Williams',
+  birthDate: '20/12/1986',
+  job: { label: 'Desarrollador Sr.', value: 'Desarrollador Sr.' },
+  email: 'user@user.com',
+  phoneNumber: '1234567890',
+  pic: 'https://th.bing.com/th/id/OIP.hzxtYUUwtyWcOqmcQd1F-gHaGs?pid=ImgDet&w=768&h=695&rs=1',
   locked: false,
   errors: {
     errorText: null,
     errorDate: null,
     errorPhoneNumber: null,
-    errorEmail: null
+    errorEmail: null,
+    errorSelect: null,
+    errorImage: null
   }
 };
 

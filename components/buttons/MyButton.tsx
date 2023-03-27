@@ -9,13 +9,11 @@ type ButtonProps = {
   icon?: IconSource;
 };
 
-const DropdownOption: React.FC<ButtonProps> = ({ onPress, text, icon }) => (
+const MyButton: React.FC<ButtonProps> = ({ onPress, text, icon }) => (
   <Button icon={icon} onPress={onPress} style={styles.button} mode="elevated">
     {text}
   </Button>
 );
-
-export default DropdownOption;
 
 const styles = StyleSheet.create({
   button: {
@@ -23,3 +21,5 @@ const styles = StyleSheet.create({
     borderRadius: 5
   }
 });
+
+export default MyButton;

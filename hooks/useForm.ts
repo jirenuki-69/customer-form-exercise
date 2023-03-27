@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { FormContext, FormContextProps } from '../context/formContext';
 import { showToast } from '../helpers/constants';
 
@@ -14,6 +14,14 @@ type FormResult = {
 
 const useForm = (): FormResult => {
   const { state, dispatch } = useContext<FormContextProps>(FormContext);
+  const [localState, setLocalState] = useState<FormState>(state);
+
+  const updateLocalState = (
+    field: string,
+    value: string | SelectOption | boolean | Errors
+  ) => {
+    setLocalState((prev) => ({ ...prev, [field]: value }));
+  };
 
   const lockForm = () => {
     const error = Object.values(state.errors).find(
@@ -23,12 +31,15 @@ const useForm = (): FormResult => {
     if (error) {
       showToast('There is an error. Card cannot be generated', 'error');
     } else {
+      updateLocalState('locked', true);
       dispatch({ type: 'LOCK_FORM' });
       showToast('Customer card has been generated');
     }
   };
 
   const unlockForm = () => {
+    dispatch({ type: 'UPDATE_FORM', payload: localState });
+    updateLocalState('locked', false);
     dispatch({ type: 'UNLOCK_FORM' });
   };
 
@@ -36,12 +47,16 @@ const useForm = (): FormResult => {
     if (!state.locked) {
       dispatch({ type: 'UPDATE_TEXT', payload: { text, field } });
     }
+
+    updateLocalState(field, text);
   };
 
   const updateImage = (uri: string) => {
     if (!state.locked) {
       dispatch({ type: 'UPDATE_IMAGE', payload: uri });
     }
+
+    updateLocalState('pic', uri);
   };
 
   const updateSelect = (option: string) => {
@@ -51,10 +66,20 @@ const useForm = (): FormResult => {
         payload: { label: option, value: option }
       });
     }
+
+    updateLocalState('job', option);
   };
 
   const handleInputError = (field: string, error: string | null) => {
     dispatch({ type: 'CHANGE_ERROR', payload: { error, field } });
+
+    setLocalState((prev) => ({
+      ...prev,
+      errors: {
+        ...prev.errors,
+        [field]: error
+      }
+    }));
   };
 
   return {

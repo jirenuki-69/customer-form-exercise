@@ -1,4 +1,4 @@
-type DropdownOption = {
+type SelectOption = {
   label: string;
   value: string;
 };

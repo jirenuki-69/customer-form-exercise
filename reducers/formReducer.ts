@@ -6,6 +6,8 @@ const formReducer = (state: FormState, action: FormAction) => {
       return { ...state, job: action.payload };
     case 'UPDATE_IMAGE':
       return { ...state, pic: action.payload };
+    case 'UPDATE_FORM':
+      return action.payload;
     case 'LOCK_FORM':
       return { ...state, locked: true };
     case 'UNLOCK_FORM':
@@ -13,7 +15,10 @@ const formReducer = (state: FormState, action: FormAction) => {
     case 'CHANGE_ERROR':
       return {
         ...state,
-        errors: { [action.payload.field]: action.payload.error }
+        errors: {
+          ...state.errors,
+          [action.payload.field]: action.payload.error
+        }
       };
     default:
       return state;

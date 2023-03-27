@@ -4,7 +4,7 @@ import CustomerForm from "./customer/CustomerForm";
 import CustomerProfilePic from "./customer/CustomerProfilePic";
 import TextField from "./inputs/TextField";
 import DateInput from "./inputs/DateInput";
-import DropdownInput from "./dropdown/DropdownInput";
+import Select from "./inputs/Select";
 
 export {
   CustomerCard,
@@ -13,5 +13,5 @@ export {
   CustomerProfilePic,
   TextField,
   DateInput,
-  DropdownInput
+  Select
 };

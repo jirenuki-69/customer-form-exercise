@@ -1,14 +1,13 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import DateInput from '../inputs/DateInput';
-import DropdownInput from '../dropdown/DropdownInput';
 import MyButton from '../buttons//MyButton';
 import TextField from '../inputs/TextField';
-import { jobOptions } from '../../helpers/constants';
 import PhoneNumberInput from '../inputs/PhoneNumberInput';
 import EmailAddressInput from '../inputs/EmailAddressInput';
 import SelectImageButton from '../buttons/SelectImageButton';
 import { useForm } from '../../hooks';
+import Select from '../inputs/Select';
 
 const CustomerForm = () => {
   const form = useForm();
@@ -21,29 +20,34 @@ const CustomerForm = () => {
         initialValue={form.state.name}
         name="name"
         sendNewValue={form.changeTextInput}
-        handleError={(error) => form.handleInputError('name', error)}
+        handleError={(error) => form.handleInputError('errorText', error)}
       />
       <DateInput
         initialValue={form.state.birthDate}
         onDateChange={form.changeTextInput}
-        handleError={(error) => form.handleInputError('birthDate', error)}
+        handleError={(error) => form.handleInputError('errorDate', error)}
       />
-      <DropdownInput
-        selected={form.state.job}
-        onSelect={form.updateSelect}
-        options={jobOptions}
+      <Select
+        initialValue={form.state.job.value}
+        handleError={(error) => form.handleInputError('errorSelect', error)}
       />
       <EmailAddressInput
         sendNewValue={form.changeTextInput}
         initialValue={form.state.email}
-        handleError={(error) => form.handleInputError('email', error)}
+        handleError={(error) => form.handleInputError('errorEmail', error)}
       />
       <PhoneNumberInput
         sendNewValue={form.changeTextInput}
         initialValue={form.state.phoneNumber}
-        handleError={(error) => form.handleInputError('phoneNumber', error)}
+        handleError={(error) =>
+          form.handleInputError('errorPhoneNumber', error)
+        }
       />
-      <SelectImageButton onImageChange={form.updateImage} />
+      <SelectImageButton
+        initialValue={form.state.pic}
+        onValueChanged={form.updateImage}
+        handleError={(error) => form.handleInputError('errorImage', error)}
+      />
       <MyButton text="Block Card" onPress={form.lockForm} icon="lock" />
       <MyButton text="Unlock Card" onPress={form.unlockForm} icon="lock-open" />
     </View>

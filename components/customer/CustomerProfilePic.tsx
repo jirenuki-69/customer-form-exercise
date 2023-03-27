@@ -4,9 +4,17 @@ import { FormContextProps, FormContext } from '../../context/formContext';
 import { Avatar } from 'react-native-paper';
 
 const CustomerProfilePic = () => {
-  const { state: { pic } } = useContext<FormContextProps>(FormContext);
+  const {
+    state: { pic }
+  } = useContext<FormContextProps>(FormContext);
 
-  return <Avatar.Image size={80} style={styles.pic} source={{ uri: pic }} />;
+  return (
+    <Avatar.Image
+      size={80}
+      style={styles.pic}
+      source={pic ? { uri: pic } : require('../../assets/user.png')}
+    />
+  );
 };
 
 const styles = StyleSheet.create({
