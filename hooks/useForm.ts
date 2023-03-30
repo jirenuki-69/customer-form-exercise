@@ -16,6 +16,8 @@ const useForm = (): FormResult => {
   const { state, dispatch } = useContext<FormContextProps>(FormContext);
   const [localState, setLocalState] = useState<FormState>(state);
 
+  console.log(localState.job)
+
   const updateLocalState = (
     field: string,
     value: string | SelectOption | boolean | Errors
@@ -67,7 +69,7 @@ const useForm = (): FormResult => {
       });
     }
 
-    updateLocalState('job', option);
+    updateLocalState('job', { label: option, value: option });
   };
 
   const handleInputError = (field: string, error: string | null) => {

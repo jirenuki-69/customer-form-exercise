@@ -30,6 +30,7 @@ const CustomerForm = () => {
       <Select
         initialValue={form.state.job.value}
         handleError={(error) => form.handleInputError('errorSelect', error)}
+        onSelectChange={(value) => form.updateSelect(value)}
       />
       <EmailAddressInput
         sendNewValue={form.changeTextInput}

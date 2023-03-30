@@ -7,11 +7,12 @@ import TextInputErrorMessage from './TextInputErrorMessage';
 
 type SelectProps = {
   initialValue: string;
+  onSelectChange: (selected: string) => void;
   handleError: (error: string | null) => void;
 };
 
-const Select: React.FC<SelectProps> = ({ initialValue, handleError }) => {
-  const { selected, error, onSelectChange } = useSelect({ initialValue });
+const Select: React.FC<SelectProps> = ({ initialValue, handleError, onSelectChange }) => {
+  const { selected, error, onSelectChange: onSelectChangeLocal } = useSelect({ initialValue });
 
   useEffect(() => {
     handleError(error);
@@ -22,7 +23,10 @@ const Select: React.FC<SelectProps> = ({ initialValue, handleError }) => {
       <View style={{ ...styles.container, marginBottom: error ? 5 : 10 }}>
         <Picker
           selectedValue={selected}
-          onValueChange={(itemValue) => onSelectChange(itemValue)}
+          onValueChange={(itemValue) => {
+            onSelectChange(itemValue);
+            onSelectChangeLocal(itemValue);
+          }}
           placeholder="Select a Job"
           mode="dialog"
         >
